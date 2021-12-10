@@ -3,10 +3,10 @@
 ### Utilities to work with security identifiers, financial accounts, and other numbers.
 
 Provides the following:
-    1. Check digit algorithms for CUSIPs, ISINs, SEDOLs, and ABA numbers.
-    2. Luhn's Algorithm
-    3. Extraction methods for finding cusips, isins, sedols, and aba numbers within text
-    4. Validation methods to check whether a string is a cusip, isin, sedol, or aba number
+1. Check digit algorithms for CUSIPs, ISINs, SEDOLs, and ABA numbers.
+2. Luhn's Algorithm
+3. Extraction methods for finding cusips, isins, sedols, and aba numbers within text
+4. Validation methods to check whether a string is a cusip, isin, sedol, or aba number
 
 To install, simply use pip:
 ```
