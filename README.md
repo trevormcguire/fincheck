@@ -1,6 +1,6 @@
 # Fincheck
 
-### Utilities to work with security identifiers, financial accounts, and other numbers.
+### Utilities to work with security identifiers, financial accounts, and checksum algorithms.
 
 Provides the following:
 1. Check digit algorithms for CUSIPs, ISINs, SEDOLs, and ABA numbers.
