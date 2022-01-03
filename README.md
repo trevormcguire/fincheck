@@ -6,7 +6,7 @@ Provides the following:
 1. Check digit algorithms for CUSIPs, ISINs, SEDOLs, and ABA numbers, as well as Luhn's algorithm
 2. Extraction methods for finding cusips, isins, sedols, and aba numbers within text
 3. Validation methods to check whether a string is a cusip, isin, sedol, or aba number
-4. Descriptive object classes for CUSIPs
+4. Descriptive object classes for CUSIPs and ISINs
 
 To install, simply use pip:
 ```
@@ -65,8 +65,8 @@ CUSIP Object Example Usage:
 >>> x = Cusip("98986X109")
 >>> x.is_valid
 True
->>> x.id_
-'98986X109'
+>>> x.ticker_
+'ZYNE'
 >>> x.name_
 'ZYNERBA PHARMACEUTICALS INC'
 >>> x.type_
@@ -77,6 +77,8 @@ True
 'equity'
 >>> x.issuer_
 '98986X'
+>>> x.id_
+'98986X109'
 >>> x.to_isin(country="US")
 'US98986X1090'
 
@@ -84,3 +86,29 @@ True
 >>> is_isin(x.to_isin(country="US"))
 True
 ```
+
+ISIN Object Example Usage:
+```
+>>> from fincheck.data import Isin
+>>> x = Isin("US0378331005")
+>>> x.country_name_
+'UNITED STATES'
+>>> x.country_code_
+'US'
+>>> x.ticker_
+'AAPL'
+>>> x.to_cusip()
+'037833100'
+
+>>> x = Isin("GB0002634946")
+>>> x.is_valid
+True
+>>> x.country_name_
+'UNITED KINGDOM'
+>>> x.to_sedol()
+'0263494'
+>>> from fincheck.validate import is_sedol
+>>> is_sedol(x.to_sedol())
+True
+```
+

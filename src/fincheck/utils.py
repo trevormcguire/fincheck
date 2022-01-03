@@ -73,4 +73,15 @@ def find_and_validate(s: str, pattern: str, validation_fn: Callable = None) -> L
             matches = [m for m in matches if validation_fn(m)]
     return matches
 
-    
+def read_csv(path: str, keep_headers: bool = False) -> List:
+    """
+    Reads a csv file by splitting by "\n" and then "," -- creating a 2d list
+    """
+    with open(path, "r") as f:
+        data = f.read()
+    data = data.split("\n")
+    if not keep_headers:
+        data = data[1:]
+    data = [x.split(",") for x in data]
+    return data
+
