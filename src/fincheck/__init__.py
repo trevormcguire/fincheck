@@ -3,10 +3,10 @@
 Fincheck
 ========
 Provides the following:
-    1. Check digit algorithms for CUSIPs, ISINs, SEDOLs, and ABA numbers.
-    2. Luhn's Algorithm
-    3. Extraction methods for finding cusips, isins, sedols, and aba numbers within text
-    4. Validation methods to check whether a string is a cusip, isin, sedol, or aba number
+    1. Check digit algorithms for CUSIPs, ISINs, SEDOLs, and ABA numbers, as well as Luhn's algorithm
+    2. Extraction methods for finding cusips, isins, sedols, and aba numbers within text
+    3. Validation methods to check whether a string is a cusip, isin, sedol, or aba number
+    4. Descriptive object classes for CUSIPs
 
 Validation Example Usage:
 
@@ -45,10 +45,38 @@ CheckDigit Calculation:
     >>> cusip_check_digit(incomplete_cusip)
     3
 
+    >>> true_sedol = "B7TL820"
+    >>> incomplete_sedol = true_sedol[:-1] #B7TL82
+    >>> sedol_check_digit(incomplete_sedol)
+    0
+
+CUSIP Object Example Usage:
+
+    >>> from fincheck.data import Cusip
+    >>> x = Cusip("98986X109")
+    >>> x.is_valid
+    True
+    >>> x.id_
+    '98986X109'
+    >>> x.name_
+    'ZYNERBA PHARMACEUTICALS INC'
+    >>> x.type_
+    'COM'
+    >>> x.issue_type_
+    'equity'
+    >>> x.issuer_
+    '98986X'
+    >>> x.to_isin(country="US")
+    'US98986X1090'
+    >>> from fincheck.validate import is_isin
+    >>> is_isin(x.to_isin(country="US"))
+    True
+
 """
 
 from . import validate
 from . import checksum
 from . import extract
 from . import utils 
+from . import data
 
