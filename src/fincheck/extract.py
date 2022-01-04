@@ -69,6 +69,19 @@ def get_sedols(s: str) -> List[str]:
     pattern = r"((?<=[^\w])|(?<=^))([0-9BCDFGHJKLMNPQRSTVWXYZ]{6}[0-9])(?=[^\w]|$)"
     return find_and_validate(s, pattern, validation_fn=is_sedol)
 
+def find_securities(s: str, include: List = ["CUSIP", "ISIN", "SEDOL"]) -> Dict:
+    allowed_types = {
+        "CUSIP": get_cusips, 
+        "ISIN": get_isins, 
+        "SEDOL": get_sedols
+        }
+    include = [x.upper() for x in include] #ensure upper
+    include = [x for x in include if x in allowed_types] #ensure types are valid
+    assert len(include) > 0, "Must include at least one of the following: CUSIP, ISIN, or SEDOL"
+    res = {}
+    for t in include:
+        res[t] = allowed_types[t](s)
+    return res
 
 def get_abas(s: str) -> List[str]:
     """

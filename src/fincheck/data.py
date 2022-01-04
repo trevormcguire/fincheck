@@ -122,7 +122,7 @@ class Isin(object):
         Returns the 9 digit NSIN (National Security Identifying Number)
         Note: 
             Depending on the country, the NSIN may be padded to fit the format of the ISIN
-            This is the case for SEDOLs (U.K.)
+            Example: This is the case for SEDOLs (U.K.)
         
         """
         return self.id_[2:-1]

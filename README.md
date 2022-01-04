@@ -22,14 +22,25 @@ True
 True
 >>> is_cusip("30303M103") #change last digit -- should be False
 False
+
+>>> #data contains a CUSIP, some noise, and an ABA number.
+>>> print(data)
+['023135106', '002105155', '011103093']
+>>> #They're hard to differentiate, but fincheck has no problem doing that.
+>>> for item in data:
+...     print(f"{item} -> Cusip: {is_cusip(item)} | ABA: {is_aba(item)}")
+... 
+023135106 -> Cusip: True | ABA: False
+002105155 -> Cusip: False | ABA: False
+011103093 -> Cusip: False | ABA: True
 ```
 
 Extraction Example Usage:
 ```
 >>> from fincheck.extract import *
->>> s = 'This is a test string that contains a cusip, incorrect cusip, isin, aba number, and a\
-        sedol M0392N101 M0392N100 US9129091081 122235821 2007849 so we can demo\
-        the extraction methods of fincheck.'
+>>> s = "This string contains a cusip, incorrect cusip, isin, aba number, \
+        and a sedol M0392N101 M0392N100 US9129091081 122235821 2007849 so \
+        we can demo the extraction methods of fincheck."
 >>> get_cusips(s)
 ['M0392N101']
 >>> get_isins(s)
@@ -38,6 +49,20 @@ Extraction Example Usage:
 ['122235821']
 >>> get_sedols(s)
 ['2007849']
+>>> find_securities(s)
+{'CUSIP': ['M0392N101'], 'ISIN': ['US9129091081'], 'SEDOL': ['2007849']}
+
+>>> s = "This is another test string with a CUSIP, some noise, and an ABA number. \
+        Notice how they are hard to tell apart, but fincheck has no problem \
+        classifying them. 023135106 002105155 011103093 -- The similarity between \
+        these shows why check digit algorithms are needed when finding these \
+        types of identifiers. Regex patterns alone do not suffice."
+>>> get_cusips(s)
+['023135106']
+>>> get_abas(s)
+['011103093']
+>>> find_securities(s)
+{'CUSIP': ['023135106'], 'ISIN': [], 'SEDOL': []}
 ```
 
 Check Digit Calculation Example:
