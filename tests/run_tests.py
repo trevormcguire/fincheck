@@ -69,8 +69,7 @@ def test_check_digits():
         ]
     for fi, ans, fn in list(zip(files, answer_files, test_fns)):
         data = txt2list(fi)
-        with open(ans, "r") as f:
-            ans = list(filter(None, f.read().split("\n")))
+        ans = txt2list(ans)
         for d, a in list(zip(data, ans)): #only want to test for the True identifiers
             if a == "True":
                 assert fn(d[:-1]) == int(d[-1])
