@@ -3,21 +3,22 @@ from .checksum import isin_check_digit
 from .validate import is_cusip, is_isin
 from .utils import read_csv
 
+
 def load_cusip_refdata() -> List:
     """
     Reference data stored in refdata/cusip/cusip_list comes directly from the SEC Cusip list as of Q3 2021
         URL: https://www.sec.gov/divisions/investment/13flists.htm
     """
-    data = read_csv("fincheck/refdata/cusip/cusip_list.csv")
+    data = read_csv("refdata/cusip/cusip_list.csv")
     data = [x for x in data if len(x) >= 4]
     return data
 
 def load_cusip_ticker_map() -> List:
-    data = read_csv("fincheck/refdata/cusip/cusip_ticker_map.csv")
+    data = read_csv("refdata/cusip/cusip_ticker_map.csv")
     return data
 
 def load_isin_country_codes() -> List:
-    data = read_csv("fincheck/refdata/isin/country_codes.csv")
+    data = read_csv("refdata/isin/country_codes.csv")
     return data
 
 class Cusip(object):

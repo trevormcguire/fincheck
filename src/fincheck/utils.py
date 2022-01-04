@@ -1,4 +1,5 @@
 from typing import *
+import pkg_resources
 import re
 
 def keep_numeric(s: str) -> str:
@@ -77,6 +78,7 @@ def read_csv(path: str, keep_headers: bool = False) -> List:
     """
     Reads a csv file by splitting by "\n" and then "," -- creating a 2d list
     """
+    path = pkg_resources.resource_filename(__name__, path)
     with open(path, "r") as f:
         data = f.read()
     data = data.split("\n")
